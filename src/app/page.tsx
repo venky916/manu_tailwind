@@ -1,10 +1,10 @@
-"use client";
-import { Grid } from "@/components/grid";
-import React from "react";
+import { Component } from "@/components/component";
+
+
 export default function Home() {
   return (
-    <div className="mt-10">
-      <Grid />
+    <div className="mx-auto flex h-screen max-w-xl items-center">
+      <Component />
     </div>
   );
 }
