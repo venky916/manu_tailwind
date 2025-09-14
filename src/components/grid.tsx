@@ -10,6 +10,78 @@ import { BrainIcon } from "./icons";
 // shadow-[0px_4px_8px_12px_var(--color-red-500)]
 // [box-shadow:0_2px_4px_8px_rgba(0,0,0,0.1)]
 
+const MainSkeleton = () => {
+  const chats = [
+    {
+      role: "user",
+      text: "hello there",
+    },
+    {
+      role: "assistant",
+      text: "hello there, how can I help you?",
+    },
+    {
+      role: "user",
+      text: "what is react?",
+    },
+    {
+      role: "assistant",
+      text: "React is a JavaScript library for building user interfaces.",
+    },
+    {
+      role: "user",
+      text: "oh nice, can I use it with TypeScript?",
+    },
+    {
+      role: "assistant",
+      text: "Yes, React works very well with TypeScript for type safety and better tooling.",
+    },
+    {
+      role: "user",
+      text: "thanks for the info!",
+    },
+    {
+      role: "assistant",
+      text: "You're welcome! Do you want me to share some resources?",
+    },
+  ];
+
+  const UserMessage = ({ text }: { text: string }) => {
+    return (
+      <div className="ml-auto flex w-fit items-start justify-end gap-2 rounded-t-full rounded-br-lg rounded-bl-full bg-blue-500 p-2">
+        <p className="text-sm text-white">{text}</p>
+        <div className="size-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
+      </div>
+    );
+  };
+
+  const AIMessage = ({ text }: { text: string }) => {
+    return (
+      <div className="mr-auto flex w-fit items-start justify-start gap-2 rounded-t-full rounded-br-full rounded-bl-lg bg-gray-100 p-2">
+        <div className="size-6 shrink-0 rounded-full bg-gradient-to-r from-green-500 to-emerald-500" />
+        <p className="text-sm text-gray-800">{text}</p>
+      </div>
+    );
+  };
+
+  return (
+    <div className="relative z-20 flex h-full w-full flex-col gap-4 px-12">
+      <input
+        type="text"
+        className="absolute inset-x-0 -bottom-px mx-auto w-[calc(100%-5rem)] rounded-md border border-neutral-200 bg-white p-1"
+        placeholder="type a message"
+      />
+      {chats.map((chat, index) => {
+        if (chat.role === "user") {
+          return <UserMessage key={index} text={chat.text} />;
+        } else {
+          return <AIMessage key={index} text={chat.text} />;
+        }
+      })}
+    </div>
+  );
+};
+
 export const Grid = () => {
   return (
     <div className="mx-auto mt-4 min-h-screen max-w-5xl border-x border-neutral-200 bg-gray-50 dark:border-neutral-700">
@@ -37,7 +109,7 @@ export const Grid = () => {
             triggers, tools used, outcomes, and timestamps.
           </CardDescription>
           <CardSkeleton>
-            <div className="h-full w-full"></div>
+            <MainSkeleton />
           </CardSkeleton>
         </Card>
         <Card className="lg:col-span-2">
@@ -74,8 +146,11 @@ const CardSkeleton = ({
 
       className={cn(
         "my-4 h-60 w-full overflow-hidden rounded-md bg-gray-50 p-2",
-        "[background-image:radial-gradient(black_1px,_transparent_1px)] [background-size:10px_10px]",
-        // "bg-[radial-gradient(var(--color-neutral-200)_1px,_transparent_1px)] bg-[size:10px_10px]",
+        // Dot Pattern
+        // "[background-image:radial-gradient(black_1px,_transparent_1px)] [background-size:10px_10px]",
+        "bg-[radial-gradient(var(--color-neutral-200)_1px,_transparent_1px)] bg-[size:10px_10px]",
+
+        // mask effect
         // "[mask-image:radial-gradient(circle_at_center,white,transparent)]",
         "mask-radial-from-40%",
         className,
