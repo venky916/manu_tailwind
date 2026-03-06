@@ -50,7 +50,7 @@ const MainSkeleton = () => {
     return (
       <div className="ml-auto flex w-fit items-start justify-end gap-2 rounded-t-full rounded-br-lg rounded-bl-full bg-blue-500 p-2">
         <p className="text-sm text-white">{text}</p>
-        <div className="size-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" />
+        <div className="size-4 rounded-full bg-gradient-to-r from-blue-700 to-purple-500" />
       </div>
     );
   };
@@ -68,9 +68,10 @@ const MainSkeleton = () => {
     <div className="relative z-20 flex h-full w-full flex-col gap-4 px-12">
       <input
         type="text"
-        className="absolute inset-x-0 -bottom-px mx-auto w-[calc(100%-5rem)] rounded-md border border-neutral-200 bg-white p-1"
+        className="absolute inset-x-0 -bottom-px mx-auto w-[calc(100%-5rem)] rounded-xl border border-neutral-200 bg-white p-2"
         placeholder="type a message"
       />
+      {/* <div className="flex h-full w-full flex-col gap-4 overflow-y-scroll"></div> */}
       {chats.map((chat, index) => {
         if (chat.role === "user") {
           return <UserMessage key={index} text={chat.text} />;
